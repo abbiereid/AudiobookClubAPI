@@ -1,0 +1,6 @@
+@AudiobookClubAPI_HostAddress = http://localhost:5059
+
+GET {{AudiobookClubAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
