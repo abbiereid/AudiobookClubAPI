@@ -1,3 +1,5 @@
+using AudiobookClubAPI.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
@@ -13,6 +15,8 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod();
     });
 });
+
+builder.Services.AddApplicationServices();
 
 var app = builder.Build();
 

@@ -8,11 +8,11 @@
   </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="SpotifyAPI.Web" Version="7.4.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers\Spotify\" />
       <Folder Include="Models\Spotify\" />
     </ItemGroup>
 
