@@ -1,22 +1,24 @@
 using AudiobookClubAPI.Facades.Spotify;
+using AudiobookClubAPI.Models.Spotify;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AudiobookClubAPI.Controllers.Spotify;
 
-public class SpotifyController
+[ApiController]
+[Route("[controller]")]
+public class SpotifyController : ControllerBase
 {
-    protected readonly string baseRoute = "spotify";
     protected readonly ISpotifyFacade _spotifyFacade;
     
-    SpotifyController(ISpotifyFacade spotifyFacade)
+    public SpotifyController(ISpotifyFacade spotifyFacade)
     {
         _spotifyFacade = spotifyFacade;
     }
 
-    [Route(("login"))]
-    public Task LoginToSpotify()
+    [HttpPost("login")]
+    public IActionResult LoginToSpotify([FromBody] SpotifyAuthRequest request)
     {
-        Console.WriteLine("Login to Spotify");
-        return null;
+        _spotifyFacade.LoginToSpotify(request);
+        return Ok();
     }
 }

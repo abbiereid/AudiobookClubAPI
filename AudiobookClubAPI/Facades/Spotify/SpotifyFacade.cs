@@ -1,9 +1,19 @@
+using AudiobookClubAPI.Models.Spotify;
+using AudiobookClubAPI.Services;
+
 namespace AudiobookClubAPI.Facades.Spotify;
 
 public class SpotifyFacade : ISpotifyFacade
 {
-    public Task LoginToSpotify()
+    private readonly ISpotifyClient _spotifyClient;
+    
+    public SpotifyFacade(ISpotifyClient spotifyClient)
     {
-        throw new NotImplementedException();
+        _spotifyClient = spotifyClient;
+    }
+    public Task LoginToSpotify(SpotifyAuthRequest request)
+    {
+        _spotifyClient.Authenticate(request);
+        return Task.CompletedTask;
     }
 }

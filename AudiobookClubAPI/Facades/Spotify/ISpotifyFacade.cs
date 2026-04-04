@@ -1,6 +1,8 @@
+using AudiobookClubAPI.Models.Spotify;
+
 namespace AudiobookClubAPI.Facades.Spotify;
 
 public interface ISpotifyFacade
 {
-    Task LoginToSpotify();
+    Task LoginToSpotify(SpotifyAuthRequest request);
 }
