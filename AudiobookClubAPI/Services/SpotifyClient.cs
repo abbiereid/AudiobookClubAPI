@@ -20,9 +20,9 @@ public class SpotifyClient : ISpotifyClient
     {
         var response = await _httpClient.PostAsync("https://accounts.spotify.com/api/token", new FormUrlEncodedContent(new Dictionary<string, string>
         {
-            {"grant_type", request.Grant_type},
+            {"grant_type", "authorization_code"},
             {"code", request.Code},
-            {"redirect_uri", request.Redirect_uri},
+            {"redirect_uri", request.RedirectUri},
         }));
         
         Console.WriteLine(response);
