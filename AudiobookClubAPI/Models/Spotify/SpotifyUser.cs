@@ -11,10 +11,10 @@ public class SpotifyUser
     public string? DisplayName { get; set; }
     
     [JsonPropertyName("images")]
-    public List<SpotifyUserProfileImages>? Images { get; set; }
+    public List<SpotifyUserProfileImage>? Images { get; set; }
 }
 
-public class SpotifyUserProfileImages
+public class SpotifyUserProfileImage
 {
     [JsonPropertyName("url")]
     public string Url { get; set; }
