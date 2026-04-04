@@ -6,19 +6,29 @@ namespace AudiobookClubAPI.Controllers.Spotify;
 
 [ApiController]
 [Route("[controller]")]
-public class SpotifyController : ControllerBase
+public class SpotifyController(ISpotifyFacade spotifyFacade) : ControllerBase
 {
-    protected readonly ISpotifyFacade _spotifyFacade;
-    
-    public SpotifyController(ISpotifyFacade spotifyFacade)
-    {
-        _spotifyFacade = spotifyFacade;
-    }
-
     [HttpPost("login")]
-    public IActionResult LoginToSpotify([FromBody] SpotifyAuthRequest request)
+    public async Task<IActionResult> LoginToSpotify([FromBody] SpotifyAuthRequest request)
     {
-        _spotifyFacade.LoginToSpotify(request);
+        var sessionId = await spotifyFacade.LoginToSpotify(request);
+        
+        var cookieOptions = new CookieOptions
+        {
+            HttpOnly = true,
+            Secure = true,
+            SameSite = SameSiteMode.Strict,
+            Expires = DateTime.UtcNow.AddDays(60)
+        };
+        Response.Cookies.Append("SessionId", sessionId, cookieOptions);
         return Ok();
+    }
+    
+    [HttpGet("me")]
+    public async Task<IActionResult> GetSpotifyUserInfo()
+    {
+        var sessionId = Request.Cookies["SessionId"] ?? throw new InvalidOperationException("SessionId cookie not found. Please log into Spotify.");
+        var response = await spotifyFacade.GetCurrentSpotifyUserInfo(sessionId);
+        return Ok(response);
     }
 }

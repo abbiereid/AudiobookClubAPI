@@ -4,5 +4,7 @@ namespace AudiobookClubAPI.Services;
 
 public interface ISpotifyClient
 {
-    Task Authenticate(SpotifyAuthRequest request);
+    Task<SpotifyTokenResponse> ExchangeAuthCodeForAccessTokenAsync(SpotifyAuthRequest request);
+    Task<SpotifyTokenResponse> RefreshAccessTokenAsync(string refreshToken);
+    Task<SpotifyUser> GetCurrentSpotifyUserAsync(string accessToken);
 }
