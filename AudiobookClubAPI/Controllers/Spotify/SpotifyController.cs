@@ -27,6 +27,9 @@ public class SpotifyController(ISpotifyFacade spotifyFacade) : ControllerBase
     [HttpGet("me")]
     public async Task<IActionResult> GetSpotifyUserInfo()
     {
+        if(HttpContext.Items["SpotifyAccessToken"] == null)
+            return Unauthorized("Spotify access token is missing. Please log in to Spotify first.");
+        
         var response = await spotifyFacade.GetCurrentSpotifyUserInfo();
         return Ok(response);
     }
