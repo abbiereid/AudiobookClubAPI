@@ -4,13 +4,6 @@
 
 ## Architecture
 
-This API is broken down into the following layers:
-- **Controllers** - entry points for all HTTP requests.
-- **Facades** - orchestrates calls to external services and returns data to the controller.
-- **Services**
-- **Middleware**
-- **Models**
-
 ## Authentication
 
 ## Endpoints
