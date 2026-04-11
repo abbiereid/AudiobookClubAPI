@@ -17,7 +17,7 @@ public class SpotifyController(ISpotifyFacade spotifyFacade) : ControllerBase
         {
             HttpOnly = true,
             Secure = true,
-            SameSite = SameSiteMode.Strict,
+            SameSite = SameSiteMode.None,
             Expires = DateTime.UtcNow.AddDays(60)
         };
         Response.Cookies.Append("SessionId", sessionId, cookieOptions);
@@ -27,8 +27,7 @@ public class SpotifyController(ISpotifyFacade spotifyFacade) : ControllerBase
     [HttpGet("me")]
     public async Task<IActionResult> GetSpotifyUserInfo()
     {
-        var sessionId = Request.Cookies["SessionId"] ?? throw new InvalidOperationException("SessionId cookie not found. Please log into Spotify.");
-        var response = await spotifyFacade.GetCurrentSpotifyUserInfo(sessionId);
+        var response = await spotifyFacade.GetCurrentSpotifyUserInfo();
         return Ok(response);
     }
 }

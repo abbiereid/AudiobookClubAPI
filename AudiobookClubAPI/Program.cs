@@ -1,4 +1,5 @@
 using AudiobookClubAPI.Extensions;
+using AudiobookClubAPI.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +31,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseCors("AllowAngular");
+app.UseMiddleware<SpotifyTokenMiddleware>();
 app.UseAuthorization();
 
 app.MapControllers(); 

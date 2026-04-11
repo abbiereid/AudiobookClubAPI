@@ -5,5 +5,5 @@ namespace AudiobookClubAPI.Facades.Spotify;
 public interface ISpotifyFacade
 {
     Task<string> LoginToSpotify(SpotifyAuthRequest request);
-    Task<SpotifyUser> GetCurrentSpotifyUserInfo(string sessionId);
+    Task<SpotifyUser> GetCurrentSpotifyUserInfo();
 }

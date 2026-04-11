@@ -10,7 +10,9 @@ public static class ServiceExtensions
     {
         services.AddScoped<ISpotifyFacade, SpotifyFacade>();
         services.AddScoped<ISpotifyClient, SpotifyClient>();
+        services.AddScoped<ISessionService, SessionService>();
         services.AddMemoryCache();
+        services.AddHttpContextAccessor();
         return services;
     }
 }
